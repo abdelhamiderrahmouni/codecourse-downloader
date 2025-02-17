@@ -3,13 +3,17 @@
 
 use App\Commands\DownloadCommand;
 use Dotenv\Dotenv;
+use Dotenv\Store\FileStore;
 use Symfony\Component\Console\Application;
 
 require 'vendor/autoload.php';
 
 const DEFAULT_DIR = __DIR__;
-$dotenv = new Dotenv(DEFAULT_DIR);
+
+// Initialize Dotenv with FileStore
+$dotenv = Dotenv::createImmutable(DEFAULT_DIR);
 $dotenv->load();
+
 $app = new Application('Codecourse downloader', '2.0');
 $app->add(new DownloadCommand());
 
